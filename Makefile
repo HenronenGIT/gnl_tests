@@ -15,6 +15,7 @@ NAME = get_next_line
 #Compilation and flags
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
+DEBUG_GLAGS = -g -fsanitize=address
 
 #Source files
 SRC = ../get_next_line.c ./main.c		\
@@ -59,6 +60,10 @@ re: fclean all
 run:
 	@@./$(NAME)
 
+debug:
+	@@make -C ../libft/ fclean && make -C ../libft/
+	@@$(CC) $(DEBUG_FLAGS) $(HEADERS) $(LIB) $(SRC) -o $(NAME)
+
 torture:
 	@@make -C ../libft/ fclean && make -C ../libft/
 	@@$(CC) $(FLAGS) $(HEADERS) $(LIB) ../get_next_line.c ./tests/torture.c -o get_next_line
@@ -66,10 +71,5 @@ torture:
 leaks:
 	@@make -C ../libft/ fclean && make -C ../libft/
 	@@$(CC) $(FLAGS) -fsanitize=leak $(HEADERS) $(LIB) $(SRC) -o $(NAME)
-
-
-debug:
-	$(CC) -g $(FLAGS) $(SRC) $(LIB) $(HEADERS)
-	lldb
 
 .PHONY: all clean fclean re

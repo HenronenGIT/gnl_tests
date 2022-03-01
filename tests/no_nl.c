@@ -40,9 +40,10 @@ int	no_nl()
 		printf("gnl_ret = %d\nExpected 1\nline = %s\nExpected abcd\n", ret, line);
 		fail = 1;
 	}
-	/* Reading line which ends to \0 */
+	//free(line);
+	/* Reading 0 */
 	ret = get_next_line(fd, &line);
-	if (ret != 0 || strcmp(line, "abcd") != 0)
+	if (ret != 0 )
 	{
 		printf("%sno_nl FAIL 2\n", RED);
 		printf(RESET);
