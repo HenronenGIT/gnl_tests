@@ -60,16 +60,8 @@ re: fclean all
 run:
 	@@./$(NAME)
 
-debug:
-	@@make -C ../libft/ fclean && make -C ../libft/
-	@@$(CC) $(DEBUG_FLAGS) $(HEADERS) $(LIB) $(SRC) -o $(NAME)
-
 torture:
 	@@make -C ../libft/ fclean && make -C ../libft/
 	@@$(CC) $(FLAGS) $(HEADERS) $(LIB) ../get_next_line.c ./tests/torture.c -o get_next_line
-
-leaks:
-	@@make -C ../libft/ fclean && make -C ../libft/
-	@@$(CC) $(FLAGS) -fsanitize=leak $(HEADERS) $(LIB) $(SRC) -o $(NAME)
 
 .PHONY: all clean fclean re
